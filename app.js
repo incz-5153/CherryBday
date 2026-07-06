@@ -4,7 +4,17 @@ function beep(freq=600,d=.08,vol=.04){audioCtx=audioCtx||new(window.AudioContext
 function spin(){if(spinning)return;spinning=true;let i=Math.floor(Math.random()*8),target=(337.5-i*45+360)%360;rotation+=1800+(target-rotation%360+360)%360;document.querySelector('.wheel').style.transform=`rotate(${rotation}deg)`;document.querySelector('#spinBtn').textContent='WHEEEEE...';let ticks=0,ticker=setInterval(()=>{beep(450+ticks*8,.04,.025);if(++ticks>28)clearInterval(ticker)},130);setTimeout(()=>{document.querySelector('#result').textContent='Your challenge: '+challenges[i];document.querySelector('#spinBtn').textContent='Spin again';spinning=false;beep(880,.35,.08);burst(90)},4900)}
 function answer(el,ok){document.querySelectorAll('.answer').forEach(x=>x.disabled=true);el.classList.add(ok?'correct':'wrong');if(ok){toast('Correct! You know Dr. Charishma!');burst(35)}else{toast('Nice try. The answer is: all of them!');setTimeout(()=>document.querySelector('.answer[data-ok="1"]').classList.add('correct'),400)}}function openEnvelope(el,msg){if(el.classList.contains('open'))return;el.classList.add('open');el.textContent=msg;burst(25)}function startParty(){burst(150);setTimeout(()=>location.href='hub.html',700)}
 function finale(){
+const song=document.getElementById("birthdaySong");
 
+if(song){
+
+song.currentTime=0;
+
+song.volume=1;
+
+song.play().catch(err=>console.log(err));
+
+}
 document.querySelector(".finale").classList.add("pop");
 
 toast("🎉 HAPPY 20TH BIRTHDAY DR. CHARISHMA! 🎉");
